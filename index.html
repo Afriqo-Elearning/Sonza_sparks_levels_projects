@@ -1,0 +1,23 @@
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <span>Select the city</span><br>
+    <select name="city" id="city">
+        <option value="arusha">Arusha</option>
+        <option value="mbeya">mbeya</option>
+        <option value="geita">geita</option>
+        <option value="mwanza">mwanza</option>
+    </select>
+    <br><br>
+    <span> You have select <span id="selection"></span> </span>
+</body>
+<script>
+    document.getElementById("city").addEventListener("change",  function(){ document.getElementById("selection").innerHTML = document.getElementById("city").value; });
+
+</script>
+</html>
