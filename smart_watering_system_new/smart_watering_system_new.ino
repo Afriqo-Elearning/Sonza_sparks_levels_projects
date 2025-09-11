@@ -53,9 +53,9 @@ void setup() {
 
 void loop() {
 
-  float h = dht.readHumidity();
+  int h = dht.readHumidity();
   // Read temperature as Celsius (the default)
-  float t = dht.readTemperature();
+  int t = dht.readTemperature();
 
   Serial.println("Humidty:" + String(h));
   Serial.println("Temperature:" + String(t));
@@ -66,9 +66,13 @@ void loop() {
   Serial.println(soilValue);
 
   lcd.setCursor(0, 0);
-  lcd.print("Moisture: ");
+  lcd.print("SM:");
   lcd.print(soilValue);
-  lcd.print("   "); // Clear old digits
+  lcd.print(" T:");
+  lcd.print(t);
+  lcd.print(" H:");
+  lcd.print(h);
+  lcd.print(""); // Clear old digits
 
   // Check soil moisture
   if (soilValue > threshold) {
