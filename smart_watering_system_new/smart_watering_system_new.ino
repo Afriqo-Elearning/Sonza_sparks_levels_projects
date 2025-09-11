@@ -1,9 +1,14 @@
+#include "DHT.h"
 #include <Wire.h>
 #include <LiquidCrystal_I2C.h>
 
 // LCD I2C address (commonly 0x27 or 0x3F)
 // Adjust if nothing shows up on LCD
 LiquidCrystal_I2C lcd(0x27, 16, 2);
+#define DHTPIN 8
+
+
+#define DHTTYPE DHT11 
 
 // Pin setup
 const int soilPin = A0;   // Soil moisture sensor
@@ -12,6 +17,7 @@ const int redLED = 4;     // Red LED
 const int greenLED = 5;   // Green LED
 const int buzzer = 6;
 
+DHT dht(DHTPIN, DHTTYPE);
 
 // Threshold value (tune according to your sensor)
 // Lower value = wetter soil
@@ -26,6 +32,9 @@ void setup() {
 
   // Initialize LCD
   lcd.init();
+
+  dht.begin();
+
   lcd.backlight();
 
   // Serial monitor for debugging
@@ -43,6 +52,14 @@ void setup() {
 }
 
 void loop() {
+
+  float h = dht.readHumidity();
+  // Read temperature as Celsius (the default)
+  float t = dht.readTemperature();
+
+  Serial.println("Humidty:" + String(h));
+  Serial.println("Temperature:" + String(t));
+
   // Read soil moisture
   int soilValue = analogRead(soilPin);
   Serial.print("Soil Moisture: ");
